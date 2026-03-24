@@ -1,0 +1,208 @@
+
+--Question 1:  How much money did Jane Smith borrow from the bank?
+SELECT SUM(loan_amount) 
+FROM loans l join users u
+ON l.user_id = u.user_id 
+WHERE u.first_name = 'Jane' and u.last_name = 'Smith'
+	
+
+--Question 2: Identify users with both investment and insurance products.
+SELECT DISTINCT u.first_name, u.last_name
+FROM Users u
+JOIN Investments i ON u.user_id = i.user_id
+JOIN Insurance ins ON u.user_id = ins.user_id;
+
+
+
+--Question 3: Calculate the average investment amount by investment type.
+SELECT t.name, ROUND(AVG(i.amount), 2) AS average_investment_amount
+FROM Investments i
+JOIN Investmenttypes t on i.investment_type_id = t.investment_type_id
+GROUP BY t.name;
+	
+
+
+--Question 4: Show the total investment by each user in descending order.
+SELECT u.first_name, u.last_name, SUM(i.amount) AS total_investment
+FROM Users u
+LEFT JOIN Investments i ON u.user_id = i.user_id
+GROUP BY u.user_id
+ORDER BY total_investment DESC;
+
+
+
+--Question 5: List all transactions over $500 
+SELECT u.first_name, u.last_name, t.transaction_id, t.amount
+FROM Transactions t
+JOIN Accounts a ON t.account_id = a.account_id
+JOIN Users u ON a.user_id = u.user_id
+WHERE t.amount > 500;
+
+
+
+--Question 6: Find all users who have a credit history problem (ch.status <> 'Good') and their total loan amount.
+SELECT u.first_name, u.last_name, SUM(l.loan_amount) AS total_loans
+FROM Users u
+JOIN Loans l ON u.user_id = l.user_id
+JOIN CreditHistories ch ON u.user_id = ch.user_id
+WHERE ch.status <> 'Good'
+GROUP BY u.first_name, u.last_name,ch.status;
+
+
+--Question 7:  Order users by their average transaction amount in the last three years.
+SELECT u.first_name, u.last_name, ROUND(AVG(t.amount),2) AS avg_transaction_amount	
+FROM Users u
+JOIN Accounts a on u.user_id = a.user_id
+JOIN Transactions t ON a.account_id = t.account_id	
+WHERE t.transaction_date >= CURRENT_DATE - INTERVAL '3 years'
+GROUP BY u.first_name, u.last_name
+ORDER BY avg_transaction_amount DESC;
+
+
+
+--Question 8: List all users who have made more than 1 ATM transaction.
+SELECT u.first_name, u.last_name, COUNT(at.atm_transaction_id) AS transaction_count
+FROM Users u
+JOIN Accounts a ON u.user_id = a.user_id
+JOIN ATMTransactions at ON a.account_id = at.account_id
+GROUP BY u.first_name, u.last_name
+HAVING COUNT(at.atm_transaction_id) > 1;
+
+
+
+--Question 9: List all users who have made over $1000 in transactions.
+SELECT u.user_id, u.first_name, u.last_name, SUM(t.amount) AS total_transactions
+FROM Users u
+JOIN Accounts a ON u.user_id = a.user_id
+JOIN Transactions t ON a.account_id = t.account_id
+GROUP BY u.user_id, u.first_name, u.last_name
+HAVING SUM(t.amount) > 1000
+ORDER BY total_transactions DESC;
+	
+	
+
+--Question 10: For each branch find the total balance for all their accounts.
+SELECT branch_name, SUM(balance) AS total_balance 
+	FROM (
+	    SELECT         
+			a.account_id,
+			a.balance,
+			b.name as branch_name,
+	        b.branch_id as branch_id    
+	    FROM        
+	        Accounts a   
+	    JOIN 
+			EmployeeBranch eb ON a.employee_id = eb.employee_id AND
+								 a.opening_date between eb.date_from and eb.date_to	
+		JOIN
+	        Branches b ON eb.branch_id = b.branch_id		
+		)
+GROUP BY branch_name;
+
+
+
+	
+	
+--Question 11: Rank branches based on the number of transactions.
+WITH user_branch AS (
+     SELECT 
+        u.user_id,
+        u.first_name,
+        u.last_name,
+		a.account_id,
+        MIN(b.branch_id) as branch_id    
+    FROM 
+        Users u
+    JOIN 
+        Accounts a ON u.user_id = a.user_id    
+    JOIN 
+		EmployeeBranch eb ON a.employee_id = eb.employee_id AND
+							 a.opening_date between eb.date_from and eb.date_to	
+	JOIN
+        Branches b ON eb.branch_id = b.branch_id
+	GROUP BY 
+		u.user_id,
+        u.first_name,
+        u.last_name,
+		a.account_id
+	)
+select ub.branch_id, b.name, count(t.transaction_id) AS Transactions_count	from Transactions t 
+	JOIN user_branch ub on t.account_id = ub.account_id
+	join branches b on ub.branch_id = b.branch_id
+GROUP BY ub.branch_id, b.name
+ORDER BY 3 desc;
+
+
+	
+-----Question 12: Show the top 2 users of loans in each branch.
+SELECT 
+    name as branch_name,
+    user_id,
+    first_name,
+    last_name,
+    total_loan_amount,
+    loan_rank
+FROM (
+    SELECT 
+		b.branch_id,
+        b.name,	
+        u.user_id,
+        u.first_name, 
+        u.last_name, 
+        SUM(l.loan_amount) AS total_loan_amount,
+        RANK() OVER (PARTITION BY b.branch_id ORDER BY SUM(l.loan_amount) DESC) AS loan_rank
+    FROM Users u
+    JOIN Loans l ON u.user_id = l.user_id
+	JOIN 
+		EmployeeBranch eb ON l.employee_id = eb.employee_id AND
+							 l.approval_date between eb.date_from and eb.date_to		
+	JOIN
+        Branches b ON eb.branch_id = b.branch_id    
+    GROUP BY b.branch_id, b.name, u.user_id, u.first_name, u.last_name
+)
+WHERE loan_rank <= 2
+ORDER BY name, loan_rank;
+
+
+
+-----Question 13: Select top 2 users per branches with regards to their account balances.
+WITH RankedUsers AS (
+    SELECT 
+        u.user_id,
+        u.first_name,
+        u.last_name,
+        b.branch_id,
+		b.name,
+        sum(a.balance) as total_balance,
+        ROW_NUMBER() OVER (PARTITION BY b.branch_id ORDER BY sum(a.balance) DESC) AS rank
+    FROM 
+        Users u
+    JOIN          
+        Accounts a ON u.user_id = a.user_id    
+    JOIN 
+		EmployeeBranch eb ON a.employee_id = eb.employee_id AND
+							 a.opening_date between eb.date_from and eb.date_to		
+	JOIN
+        Branches b ON eb.branch_id = b.branch_id
+	GROUP BY 
+		u.user_id,
+        u.first_name,
+        u.last_name,
+        b.branch_id,
+		b.name
+)
+SELECT 
+    name as branch_name,
+    user_id,
+    first_name,
+    last_name,
+    total_balance
+FROM 
+    RankedUsers
+WHERE 
+    rank <= 2
+ORDER BY 
+    branch_id, rank;
+
+
+

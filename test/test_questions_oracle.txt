@@ -1,0 +1,57 @@
+--Question 1:  How many clients do we have?
+SELECT COUNT(*) FROM CLIENT;
+
+--Question 2: How many questions there are per each ESG Category (ESRS_Standard)?
+SELECT esrs_standard, COUNT(*) FROM Question 
+GROUP BY esrs_standard;
+
+--Question 3: Order ESG Categories (ESRS_Standard) by the number of questions?
+SELECT esrs_standard, COUNT(*) FROM Question 
+GROUP BY esrs_standard
+ORDER BY COUNT(*) DESC;
+
+--Question 4:  How many users does Koios have?
+SELECT COUNT(user_id) 
+FROM USERS U JOIN CLIENT C ON U.client_id = C.client_id
+WHERE C.client_name = 'Koios';
+
+--Question 5: Find the total number of questions assigned to each user.
+SELECT user_id, COUNT(question_id) FROM user_question 
+GROUP BY user_id;
+
+--Question 6:  Find the number of answered questions per user.
+SELECT A.user_id, U.username, COUNT(A.answer_id) 
+FROM answer A JOIN USERS U ON A.user_id = U.user_id
+GROUP BY A.user_id, U.username;
+
+
+--Question 7: find all users who have updated their profile in the last three months and sort them by the update date in descending order.
+SELECT user_id, username, update_date FROM USERS
+WHERE UPDATE_DATE >= ADD_MONTHS(SYSDATE, -3)
+ORDER BY UPDATE_DATE DESC;
+
+--Question 8:  list all topics and subtopics whose subtopics have more than 100 questions.
+select st.topic_id, t.topic_name, st.subtopic_id, st.subtopic_name, count(q.question_id) 
+from Question q
+join topic t on q.ESRS_STANDARD = t.ESRS_STANDARD
+right join subtopic st on t.topic_id = st.topic_id
+group by st.topic_id, t.topic_name, st.subtopic_id, st.subtopic_name
+having count(q.question_id) > 100;
+
+
+--Question 9: find all questions that include the word 'emission' in their text.   
+SELECT question_id, question_text
+FROM Question 
+WHERE UPPER(question_text) LIKE '%EMISSION%'
+ORDER BY question_id;
+
+
+--Question 10: Find all questions that have never been answered and show their esrs standard.
+SELECT q.ESRS_STANDARD, q.question_id, q.question_text
+FROM Question  q
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM ANSWER a
+    WHERE a.question_id= q.question_id
+)
+ORDER BY q.question_id;
