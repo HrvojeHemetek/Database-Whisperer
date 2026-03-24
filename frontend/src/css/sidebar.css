@@ -1,0 +1,31 @@
+.sidebar {
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    background-color: #373a47;
+    padding-top: 60px; /* Adjust padding to align with your design */
+}
+  
+  .sidebar h1 {
+    color: #eee;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-item {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding: 15px 20px;
+    color: #b8b7ad;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    padding-left: 40px;
+    cursor: pointer;
+  }
+  
+  .sidebar-item:hover {
+    font-size: large;
+    background: #575a63;
+    color: #fff;
+  }
+  

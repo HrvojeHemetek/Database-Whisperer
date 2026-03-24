@@ -1,0 +1,47 @@
+:root {
+    --primary-color: #333333;
+    --secondary-color: #F0F0F0;
+    --background-color: #FFFFFF;
+    --border-color: #E0E0E0;
+    --text-color: #333333;
+    --input-background-color: #F9F9F9;
+    --button-color: #666666;
+    --button-hover-color: #555555;
+    --user-message-color: #666666;
+    --user-message-text-color: #FFFFFF;
+    --model-message-color: #FFFFFF;
+    --model-message-text-color: #333333;
+  }
+
+  .table-wrapper {
+    max-width: 90%;
+    margin: 20px auto;
+    overflow-x: auto; /* Enables horizontal scrolling if needed */
+  }
+
+  .table-container {
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+  
+  .table-container th,
+  .table-container td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .table-container th {
+    background-color: var(--primary-color);
+    color: var(--user-message-text-color);
+  }
+  
+  .table-container td {
+    background-color: var(--model-message-color);
+    color: var(--model-message-text-color);
+  }
+  
+  .table-container tr:nth-child(even) {
+    background-color: var(--secondary-color);
+  }
+  
