@@ -1,0 +1,506 @@
+-#-# Table: cards
+
+### Description
+This table stores information about bank-issued cards for users, including card type, limit, and status.
+
+### Column Descriptions
+- **card_id**: Unique identifier for the card.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **card_number**: The number of the card.
+- **card_type**: The type of the card (e.g., credit, debit).
+- **card_limit**: The limit of the card.
+- **expiration_date**: The expiration date of the card.
+- **employee_id**: Identifier for the employee who issued the card. References `employees(employee_id)`.
+- **status**: The status of the card (e.g., active, blocked).
+
+### Primary Keys
+- **card_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+- **employee_id**: References `employees(employee_id)`.
+
+-#-# Table: transactions
+
+### Description
+This table contains information about financial transactions related to user accounts, including amounts and transaction dates.
+
+### Column Descriptions
+- **transaction_id**: Unique identifier for the transaction.
+- **account_id**: Identifier for the account. References `accounts(account_id)`.
+- **amount**: The amount of the transaction.
+- **transaction_date**: The date of the transaction.
+- **transaction_type**: The type of the transaction (e.g., deposit, withdrawal).
+- **description**: Description of the transaction.
+
+### Primary Keys
+- **transaction_id**
+
+### Foreign Keys
+- **account_id**: References `accounts(account_id)`.
+
+-#-# Table: loans
+
+### Description
+This table tracks information about loans granted by the bank to users, including amounts, interest rates, and loan status.
+
+### Column Descriptions
+- **loan_id**: Unique identifier for the loan.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **loan_amount**: The amount of the loan.
+- **interest_rate**: The interest rate of the loan.
+- **repayment_term**: The repayment term of the loan in months.
+- **approval_date**: The date when the loan was approved.
+- **employee_id**: Identifier for the employee who approved the loan. References `employees(employee_id)`.
+- **status**: The status of the loan (e.g., active, closed).
+
+### Primary Keys
+- **loan_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+- **employee_id**: References `employees(employee_id)`.
+
+-#-# Table: loanpayments
+
+### Description
+This table records loan payments, including payment amounts and due dates.
+
+### Column Descriptions
+- **payment_id**: Unique identifier for the loan payment.
+- **loan_id**: Identifier for the loan. References `loans(loan_id)`.
+- **amount**: The amount of the payment.
+- **due_date**: The due date of the payment.
+- **payment_date**: The date the payment was made.
+- **status**: The status of the payment (e.g., on-time, late).
+
+### Primary Keys
+- **payment_id**
+
+### Foreign Keys
+- **loan_id**: References `loans(loan_id)`.
+
+-#-# Table: cardtransactions
+
+### Description
+This table stores data on transactions made using bank cards, including amounts and transaction dates.
+
+### Column Descriptions
+- **card_transaction_id**: Unique identifier for the card transaction.
+- **card_id**: Identifier for the card. References `cards(card_id)`.
+- **amount**: The amount of the transaction.
+- **transaction_date**: The date of the transaction.
+- **description**: Description of the transaction.
+
+### Primary Keys
+- **card_transaction_id**
+
+#-#-# Foreign Keys
+- **card_id**: References `cards(card_id)`.
+
+-#-# Table: investments
+
+### Description
+This table tracks investments made by bank users, including investment types, amounts, and maturity dates.
+
+### Column Descriptions
+- **investment_id**: Unique identifier for the investment.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **investment_type_id**: Identifier for the investment type. References `investmenttypes(investment_type_id)`.
+- **amount**: The amount of the investment.
+- **investment_date**: The date when the investment was made.
+- **maturity_date**: The date when the investment matures.
+- **employee_id**: Identifier for the employee who managed the investment. References `employees(employee_id)`.
+- **status**: The status of the investment (e.g., active, matured).
+
+### Primary Keys
+- **investment_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+- **investment_type_id**: References `investmenttypes(investment_type_id)`.
+- **employee_id**: References `employees(employee_id)`.
+
+-#-# Table: investmenttypes
+
+### Description
+This table defines the different types of investments offered by the bank.
+
+### Column Descriptions
+- **investment_type_id**: Unique identifier for the investment type.
+- **name**: The name of the investment type.
+
+### Primary Keys
+- **investment_type_id**
+
+### Foreign Keys
+- **None**
+
+-#-# Table: users
+
+### Description
+This table contains personal information about the bank's users, including names, addresses, and contact details.
+
+### Column Descriptions
+- **user_id**: Unique identifier for the user.
+- **first_name**: First name of the user.
+- **last_name**: Last name of the user.
+- **ssn**: Social Security Number of the user.
+- **address**: Address of the user.
+- **phone**: Phone number of the user.
+- **email**: Email address of the user.
+- **date_of_birth**: Date of birth of the user.
+
+### Primary Keys
+- **user_id**
+
+### Foreign Keys
+- **None**
+
+-#-# Table: accounts
+
+### Description
+This table stores information about user bank accounts, including account types, numbers, and balances.
+
+### Column Descriptions
+- **account_id**: Unique identifier for the account.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **account_number**: The number of the account.
+- **account_type**: The type of the account (e.g., checking, savings).
+- **balance**: The balance of the account.
+- **opening_date**: The date when the account was opened.
+- **employee_id**: Identifier for the employee who opened the account. References `employees(employee_id)`.
+- **status**: The status of the account (e.g., active, closed).
+
+### Primary Keys
+- **account_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+- **employee_id**: References `employees(employee_id)`.
+
+-#-# Table: employees
+
+### Description
+This table contains information about the bank's employees, including personal details, positions, and employment statuses.
+
+### Column Descriptions
+- **employee_id**: Unique identifier for the employee.
+- **first_name**: First name of the employee.
+- **last_name**: Last name of the employee.
+- **position**: The position of the employee within the bank.
+- **hire_date**: The date when the employee was hired.
+- **salary**: The salary of the employee.
+- **status**: The status of the employee (e.g., active, terminated).
+
+### Primary Keys
+- **employee_id**
+
+### Foreign Keys
+- **None**
+
+-#-# Table: insurance
+
+### Description
+This table records information about insurance policies that users have, including coverage amounts and policy status.
+
+### Column Descriptions
+- **insurance_id**: Unique identifier for the insurance policy.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **insurance_type_id**: Identifier for the insurance type. References `insurancetypes(insurance_type_id)`.
+- **coverage_amount**: The amount of coverage provided by the policy.
+- **start_date**: The start date of the policy.
+- **end_date**: The end date of the policy.
+- **employee_id**: Identifier for the employee who issued the policy. References `employees(employee_id)`.
+- **status**: The status of the policy (e.g., active, expired).
+
+### Primary Keys
+- **insurance_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+- **insurance_type_id**: References `insurancetypes(insurance_type_id)`.
+- **employee_id**: References `employees(employee_id)`.
+
+-#-# Table: insurancetypes
+
+### Description
+This table defines the different types of insurance offered by the bank.
+
+### Column Descriptions
+- **insurance_type_id**: Unique identifier for the insurance type.
+- **name**: The name of the insurance type.
+
+### Primary Keys
+- **insurance_type_id**
+
+### Foreign Keys
+- **None**
+
+-#-# Table: standingorders
+
+### Description
+This table stores information about standing orders linked to user accounts, including amounts and order durations.
+
+### Column Descriptions
+- **order_id**: Unique identifier for the standing order.
+- **account_id**: Identifier for the account. References `accounts(account_id)`.
+- **amount**: The amount of the standing order.
+- **start_date**: The start date of the standing order.
+- **end_date**: The end date of the standing order.
+- **description**: Description of the standing order.
+
+### Primary Keys
+- **order_id**
+
+### Foreign Keys
+- **account_id**: References `accounts(account_id)`.
+
+-#-# Table: customercomplaints
+
+### Description
+This table
+
+ records customer complaints, including complaint descriptions, statuses, and resolution dates.
+
+### Column Descriptions
+- **complaint_id**: Unique identifier for the complaint.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **description**: Description of the complaint.
+- **date_filed**: The date when the complaint was filed.
+- **status**: The status of the complaint (e.g., pending, resolved).
+- **resolution_date**: The date when the complaint was resolved.
+
+### Primary Keys
+- **complaint_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+
+-#-# Table: transactiontaxes
+
+### Description
+This table tracks taxes associated with transactions, including tax amounts and related transactions.
+
+### Column Descriptions
+- **tax_id**: Unique identifier for the transaction tax.
+- **transaction_id**: Identifier for the transaction. References `transactions(transaction_id)`.
+- **tax_amount**: The amount of the tax.
+- **description**: Description of the tax.
+
+### Primary Keys
+- **tax_id**
+
+### Foreign Keys
+- **transaction_id**: References `transactions(transaction_id)`.
+
+-#-# Table: taxes
+
+### Description
+This table defines the different types of taxes that can be applied to transactions within the bank.
+
+### Column Descriptions
+- **tax_id**: Unique identifier for the tax.
+- **name**: The name of the tax.
+- **rate**: The rate of the tax.
+
+### Primary Keys
+- **tax_id**
+
+### Foreign Keys
+- **None**
+
+-#-# Table: atms
+
+### Description
+This table contains data about ATMs, including locations and current statuses.
+
+### Column Descriptions
+- **atm_id**: Unique identifier for the ATM.
+- **location**: The location of the ATM.
+- **status**: The status of the ATM (e.g., operational, out of service).
+
+### Primary Keys
+- **atm_id**
+
+### Foreign Keys
+- **None**
+
+-#-# Table: atmtransactions
+
+### Description
+This table records transactions made through ATMs, including amounts and transaction dates.
+
+### Column Descriptions
+- **atm_transaction_id**: Unique identifier for the ATM transaction.
+- **atm_id**: Identifier for the ATM. References `atms(atm_id)`.
+- **account_id**: Identifier for the account. References `accounts(account_id)`.
+- **amount**: The amount of the transaction.
+- **transaction_date**: The date of the transaction.
+- **description**: Description of the transaction.
+
+### Primary Keys
+- **atm_transaction_id**
+
+### Foreign Keys
+- **atm_id**: References `atms(atm_id)`.
+- **account_id**: References `accounts(account_id)`.
+
+-#-# Table: employeebranch
+
+### Description
+This table tracks the assignment of employees to different branches of the bank, including start and end dates of these assignments.
+
+### Column Descriptions
+- **assignment_id**: Unique identifier for the employee branch assignment.
+- **employee_id**: Identifier for the employee. References `employees(employee_id)`.
+- **branch_id**: Identifier for the branch. References `branches(branch_id)`.
+- **start_date**: The start date of the assignment.
+- **end_date**: The end date of the assignment.
+
+### Primary Keys
+- **assignment_id**
+
+### Foreign Keys
+- **employee_id**: References `employees(employee_id)`.
+- **branch_id**: References `branches(branch_id)`.
+
+-#-# Table: branches
+
+### Description
+This table stores information about the bank's branches, including names and locations.
+
+### Column Descriptions
+- **branch_id**: Unique identifier for the branch.
+- **name**: The name of the branch.
+- **location**: The location of the branch.
+
+### Primary Keys
+- **branch_id**
+
+### Foreign Keys
+- **None**
+
+-#-# Table: employeesalaries
+
+### Description
+This table records salary payments to employees, including payment amounts and payment dates.
+
+### Column Descriptions
+- **salary_id**: Unique identifier for the salary payment.
+- **employee_id**: Identifier for the employee. References `employees(employee_id)`.
+- **amount**: The amount of the salary payment.
+- **payment_date**: The date of the salary payment.
+
+### Primary Keys
+- **salary_id**
+
+### Foreign Keys
+- **employee_id**: References `employees(employee_id)`.
+
+-#-# Table: clientactivities
+
+### Description
+This table tracks user activities, including types of activities and descriptions.
+
+### Column Descriptions
+- **activity_id**: Unique identifier for the activity.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **activity_type**: The type of the activity.
+- **description**: Description of the activity.
+- **activity_date**: The date of the activity.
+
+### Primary Keys
+- **activity_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+
+-#-# Table: customersupport
+
+### Description
+This table records interactions between users and customer support, including descriptions of interactions and statuses.
+
+### Column Descriptions
+- **support_id**: Unique identifier for the customer support interaction.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **description**: Description of the interaction.
+- **interaction_date**: The date of the interaction.
+- **status**: The status of the interaction (e.g., open, resolved).
+
+### Primary Keys
+- **support_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+
+-#-# Table: securitychecks
+
+### Description
+This table tracks security checks for users, including dates and results of these checks.
+
+### Column Descriptions
+- **check_id**: Unique identifier for the security check.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **check_date**: The date of the security check.
+- **result**: The result of the security check.
+
+### Primary Keys
+- **check_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+
+-#-# Table: systemaccess
+
+### Description
+This table records system accesses by employees, including descriptions and access dates.
+
+### Column Descriptions
+- **access_id**: Unique identifier for the system access.
+- **employee_id**: Identifier for the employee. References `employees(employee_id)`.
+- **description**: Description of the access.
+- **access_date**: The date of the system access.
+
+### Primary Keys
+- **access_id**
+
+### Foreign Keys
+- **employee_id**: References `employees(employee_id)`.
+
+-#-# Table: credithistories
+
+### Description
+This table stores data on users' credit histories, including statuses and credit notes.
+
+### Column Descriptions
+- **credit_history_id**: Unique identifier for the credit history.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **status**: The status of the credit history (e.g., good, bad).
+- **notes**: Notes about the credit history.
+
+### Primary Keys
+- **credit_history_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+
+-#-# Table: customerrelationships
+
+### Description
+This table tracks relationships between bank users, including relationship types and associated users.
+
+### Column Descriptions
+- **relationship_id**: Unique identifier for the customer relationship.
+- **user_id**: Identifier for the user. References `users(user_id)`.
+- **related_user_id**: Identifier for the related user. References `users(user_id)`.
+- **relationship_type**: The type of the relationship (e.g., family, business).
+- **start_date**: The start date of the relationship.
+- **end_date**: The end date of the relationship.
+
+### Primary Keys
+- **relationship_id**
+
+### Foreign Keys
+- **user_id**: References `users(user_id)`.
+- **related_user_id**: References `users(user_id)`.

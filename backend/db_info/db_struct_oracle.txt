@@ -1,0 +1,788 @@
+Table: AI_ASSISTANT
+  Column: ASSISTANT_CLIENT_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: ASSISTANT_ID, Type: VARCHAR2
+  Column: VS_ID, Type: VARCHAR2
+  Column: THREAD_ID, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    ASSISTANT_CLIENT_ID
+  Foreign Keys:
+
+Table: AI_ASSISTANT_TEMP
+  Column: ASSISTANT_CLIENT_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: ASSISTANT_ID, Type: VARCHAR2
+  Column: VS_ID, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    ASSISTANT_CLIENT_ID
+  Foreign Keys:
+
+Table: AI_FILES
+  Column: AI_FILE_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: FILE_ID_LOCAL, Type: NUMBER
+  Column: FILE_SOURCE, Type: VARCHAR2
+  Column: FILE_ID_STORAGE, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    AI_FILE_ID
+  Foreign Keys:
+
+Table: AI_RESPONSE_TEXT
+  Column: ID, Type: NUMBER
+  Column: TEXT_VALUE, Type: VARCHAR2
+  Primary Keys:
+  Foreign Keys:
+
+Table: ANSWER
+  Column: ANSWER_ID, Type: NUMBER
+  Column: ANSWER_TEXT, Type: VARCHAR2
+  Column: ANSWER_TYPE, Type: VARCHAR2
+  Column: ANSWER_TEXT_CHECKBOX, Type: VARCHAR2
+  Column: ANSWER_TYPE_CHECKBOX, Type: VARCHAR2
+  Column: ANSWER_STATUS, Type: NUMBER
+  Column: USER_ID, Type: NUMBER
+  Column: QUESTION_ID, Type: NUMBER
+  Column: MEASURING_UNIT, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+  Foreign Keys:
+
+Table: ANSWER_FILES
+  Column: ANSWER_FILES_ID, Type: NUMBER
+  Column: ANSWER_ID, Type: NUMBER
+  Column: FILENAME, Type: VARCHAR2
+  Column: FILE_MIMETYPE, Type: VARCHAR2
+  Column: FILE_CHARSET, Type: VARCHAR2
+  Column: FILE_BLOB, Type: BLOB
+  Column: FILE_COMMENTS, Type: VARCHAR2
+  Column: TAGS, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+  Foreign Keys:
+
+Table: CLASSIFICATION
+  Column: CLASSIFICATION_ID, Type: NUMBER
+  Column: FIELD, Type: VARCHAR2
+  Column: SECTION, Type: VARCHAR2
+  Column: GROUP, Type: VARCHAR2
+  Column: CLASS_CODE, Type: VARCHAR2
+  Column: BUSINESS_NAME, Type: VARCHAR2
+  Column: NACE_CODE, Type: VARCHAR2
+  Primary Keys:
+  Foreign Keys:
+
+Table: CLIENT
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CLIENT_NAME, Type: VARCHAR2
+  Column: OIB, Type: NUMBER
+  Column: COUNTRY_ID, Type: NUMBER
+  Column: POSTAL_OFFICE_ID, Type: NUMBER
+  Column: ADDRESS, Type: VARCHAR2
+  Column: WEB_PAGE, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Primary Keys:
+    CLIENT_ID
+  Foreign Keys:
+
+Table: CLIENT_CLASSIFICATION
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CLASSIFICATION_ID, Type: NUMBER
+  Column: BUSINESS_SIZE, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_ID
+  Foreign Keys:
+
+Table: CLIENT_FILES
+  Column: CLIENT_FILES_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: FILENAME, Type: VARCHAR2
+  Column: FILE_MIMETYPE, Type: VARCHAR2
+  Column: FILE_CHARSET, Type: VARCHAR2
+  Column: FILE_BLOB, Type: BLOB
+  Column: FILE_COMMENTS, Type: VARCHAR2
+  Column: TAGS, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_FILES_ID
+  Foreign Keys:
+
+Table: CLIENT_FINANCE
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CLIENT_ANNUAL_REVENUE, Type: NUMBER
+  Column: CLIENT_ANNUAL_EXPENSES, Type: NUMBER
+  Column: CLIENT_TOTAL_ASSETS, Type: NUMBER
+  Column: CLIENT_NET_PROFIT_OR_LOSS, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_ID
+  Foreign Keys:
+
+Table: CLIENT_LEVEL_1
+  Column: CLIENT_LEVEL_1_ID, Type: NUMBER
+  Column: CLIENT_LEVEL_1_NAME, Type: VARCHAR2
+  Column: UPDATE_USER, Type: NUMBER
+  Column: CLIENT_LEVEL_1_DESCRIPTION, Type: VARCHAR2
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_LEVEL_1_ID
+  Foreign Keys:
+
+Table: CLIENT_LEVEL_2
+  Column: CLIENT_LEVEL_2_ID, Type: NUMBER
+  Column: CLIENT_LEVEL_2_NAME, Type: VARCHAR2
+  Column: CLIENT_LEVEL_2_DESCRIPTION, Type: VARCHAR2
+  Column: CLIENT_LEVEL_1_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_LEVEL_2_ID
+  Foreign Keys:
+
+Table: CLIENT_PARTNER
+  Column: CLIENT_PARTNER_ID, Type: NUMBER
+  Column: CLIENT_PARTNER_NAME, Type: VARCHAR2
+  Column: OIB, Type: VARCHAR2
+  Column: COUNTRY_ID, Type: NUMBER
+  Column: POSTAL_OFFICE_ID, Type: NUMBER
+  Column: ADDRESS, Type: VARCHAR2
+  Column: WEB_PAGE, Type: VARCHAR2
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_PARTNER_ID
+  Foreign Keys:
+
+Table: CLIENT_PARTNER_CLASSIFICATION
+  Column: CLIENT_PARTNER_ID, Type: NUMBER
+  Column: CLASSIFICATION_ID, Type: NUMBER
+  Column: BUSINESS_SIZE, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_PARTNER_ID
+  Foreign Keys:
+
+Table: CLIENT_PARTNER_PEOPLE_RESPONSIBLE
+  Column: CLIENT_PARTNER_PEOPLE_RESPONSIBLE_ID, Type: NUMBER
+  Column: CLIENT_PARTNER_ID, Type: NUMBER
+  Column: PERSON_RESPONSIBLE_NAME, Type: VARCHAR2
+  Column: PERSON_RESPONSIBLE_SURNAME, Type: VARCHAR2
+  Column: PERSON_RESPONSIBLE_EMAIL, Type: VARCHAR2
+  Column: CONTACT_PERSON_NAME, Type: VARCHAR2
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: NUMBER_OF_EMPLOYEES, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CONTACT_PERSON_SURNAME, Type: VARCHAR2
+  Column: CONTACT_PERSON_EMAIL, Type: VARCHAR2
+  Primary Keys:
+    CLIENT_PARTNER_PEOPLE_RESPONSIBLE_ID
+  Foreign Keys:
+
+Table: CLIENT_PEOPLE_RESPONSIBLE
+  Column: CLIENT_ID, Type: NUMBER
+  Column: PERSON_REPONSIBLE_NAME, Type: VARCHAR2
+  Column: PERSON_REPONSIBLE_SURNAME, Type: VARCHAR2
+  Column: PERSON_REPONSIBLE_E_MAIL, Type: VARCHAR2
+  Column: CONTACT_PERSON_NAME, Type: VARCHAR2
+  Column: CONTACT_PERSON_SURNAME, Type: VARCHAR2
+  Column: CONTACT_PERSON_E_MAIL, Type: VARCHAR2
+  Column: NUMBER_OF_EMPLOYEES, Type: NUMBER
+  Column: CLIENT_PEOPLE_RESPONSIBLE_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_PEOPLE_RESPONSIBLE_ID
+  Foreign Keys:
+
+Table: CLIENT_REPORT_FILES
+  Column: FILE_MIMETYPE, Type: VARCHAR2
+  Column: FILE_CHARSET, Type: VARCHAR2
+  Column: FILE_BLOB, Type: BLOB
+  Column: FILE_COMMENTS, Type: VARCHAR2
+  Column: TAGS, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: CLIENT_REPORT_FILES_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: FILENAME, Type: VARCHAR2
+  Primary Keys:
+    CLIENT_REPORT_FILES_ID
+  Foreign Keys:
+
+Table: CLIENT_USER_HIERARCHY
+  Column: CLIENT_USER_HIERARCHY_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CLIENT_LEVEL_2_ID, Type: NUMBER
+  Column: USER_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    CLIENT_USER_HIERARCHY_ID
+  Foreign Keys:
+
+Table: CODES
+  Column: CODE_ID, Type: NUMBER
+  Column: CODE_NAME, Type: VARCHAR2
+  Column: CODE_NUMBER, Type: VARCHAR2
+  Column: VALUE, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: CODE_LIST_ID, Type: NUMBER
+  Primary Keys:
+    CODE_ID
+  Foreign Keys:
+
+Table: COMMENTS
+  Column: COMMENT_ID, Type: NUMBER
+  Column: COMMENT_TEXT, Type: VARCHAR2
+  Column: QUESTION_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: USER_ID, Type: NUMBER
+  Column: AVATAR_INITIALS, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    COMMENT_ID
+  Foreign Keys:
+
+Table: COUNTRY_LIST
+  Column: COUNTRY_ID, Type: NUMBER
+  Column: CODE, Type: VARCHAR2
+  Column: NAME_EN, Type: VARCHAR2
+  Column: NAME_HR, Type: VARCHAR2
+  Primary Keys:
+    COUNTRY_ID
+  Foreign Keys:
+
+Table: DBTOOLS$EXECUTION_HISTORY
+  Column: ID, Type: NUMBER
+  Column: HASH, Type: CLOB
+  Column: CREATED_BY, Type: VARCHAR2
+  Column: CREATED_ON, Type: TIMESTAMP(6) WITH TIME ZONE
+  Column: UPDATED_BY, Type: VARCHAR2
+  Column: UPDATED_ON, Type: TIMESTAMP(6) WITH TIME ZONE
+  Column: STATEMENT, Type: CLOB
+  Column: TIMES, Type: NUMBER
+  Primary Keys:
+    ID
+  Foreign Keys:
+
+Table: EMISSION_FACTOR
+  Column: EMISSION_FACTOR_ID, Type: NUMBER
+  Column: CATEGORY_NAME, Type: VARCHAR2
+  Column: SCOPE, Type: VARCHAR2
+  Column: SCOPE_CATEGORY, Type: VARCHAR2
+  Column: MEASURING_UNIT, Type: VARCHAR2
+  Column: CALC_FACTOR, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    EMISSION_FACTOR_ID
+  Foreign Keys:
+
+Table: ERROR_LOG
+  Column: ERROR_ID, Type: NUMBER
+  Column: ERROR_MESSAGE, Type: VARCHAR2
+  Column: ERROR_CODE, Type: VARCHAR2
+  Column: ERROR_TIME, Type: TIMESTAMP(6)
+  Column: ERROR_SOURCE, Type: VARCHAR2
+  Primary Keys:
+    ERROR_ID
+  Foreign Keys:
+
+Table: GPT_RESPONSE
+  Column: CONTENT, Type: VARCHAR2
+  Primary Keys:
+  Foreign Keys:
+
+Table: KPI_DEFINITION
+  Column: KPI_DEFINITION_ID, Type: NUMBER
+  Column: ESG_INITIATIVE, Type: CHAR
+  Column: ESRS_STANDARD, Type: CHAR
+  Column: KPI_GROUP, Type: VARCHAR2
+  Primary Keys:
+    KPI_DEFINITION_ID
+  Foreign Keys:
+
+Table: PARAMS
+  Column: PARAMS_ID, Type: NUMBER
+  Column: VALUE, Type: VARCHAR2
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: CREATE_USER, Type: NUMBER
+  Column: SOURCE, Type: VARCHAR2
+  Primary Keys:
+    PARAMS_ID
+  Foreign Keys:
+
+Table: POSTAL_OFFICE
+  Column: POSTAL_OFFICE_ID, Type: NUMBER
+  Column: COUNTRY_ID, Type: NUMBER
+  Column: LOCALITY, Type: VARCHAR2
+  Column: COUNTY, Type: VARCHAR2
+  Column: POSTAL_CODE, Type: NUMBER
+  Column: POSTAL_CODE_NAME, Type: VARCHAR2
+  Primary Keys:
+    POSTAL_OFFICE_ID
+  Foreign Keys:
+
+Table: QUESTION
+  Column: QUESTION_ID, Type: NUMBER
+  Column: ESRS_NUMBER, Type: VARCHAR2
+  Column: ESRS_NAME, Type: VARCHAR2
+  Column: ESRS_STANDARD, Type: VARCHAR2
+  Column: DISCLOSURE_REQ, Type: VARCHAR2
+  Column: ESRS_PARAGRAPH, Type: VARCHAR2
+  Column: RELATED_ASSESMENT_REQ, Type: VARCHAR2
+  Column: QUESTION_TEXT, Type: VARCHAR2
+  Column: DATA_TYPE, Type: VARCHAR2
+  Column: QUESTION_SUBTEXT, Type: VARCHAR2
+  Column: MULTIPLE_CHOICE_Y_N, Type: VARCHAR2
+  Column: MC_ADD_ANSWER_Y_N, Type: VARCHAR2
+  Column: NARRATIVE_Y_N, Type: VARCHAR2
+  Column: NARRATIVE_DESC, Type: VARCHAR2
+  Column: NUMERIC_Y_N, Type: VARCHAR2
+  Column: NUMERIC_DESC, Type: VARCHAR2
+  Column: TEMPLATE_DL_Y_N, Type: VARCHAR2
+  Column: TEMPLATE_FILENAME, Type: VARCHAR2
+  Column: TEMPLATE_DESC, Type: VARCHAR2
+  Column: ATTACHMENT_Y_N, Type: VARCHAR2
+  Column: ATTACHMENT_DESC, Type: VARCHAR2
+  Column: QUESTION_HELP, Type: VARCHAR2
+  Column: MEASURING_UNIT, Type: VARCHAR2
+  Column: QUESTION_TYPE, Type: VARCHAR2
+  Column: ANSWER_EXAMPLE, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    QUESTION_ID
+  Foreign Keys:
+
+Table: QUESTION_FILES
+  Column: QUESTION_FILES_ID, Type: NUMBER
+  Column: QUESTION_ID, Type: NUMBER
+  Column: FILENAME, Type: VARCHAR2
+  Column: FILE_MIMETYPE, Type: VARCHAR2
+  Column: FILE_CHARSET, Type: VARCHAR2
+  Column: FILE_BLOB, Type: BLOB
+  Column: FILE_COMMENTS, Type: VARCHAR2
+  Column: TAGS, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    QUESTION_FILES_ID
+  Foreign Keys:
+
+Table: QUESTION_MC_ADD
+  Column: QUESTION_MC_ADD_ID, Type: NUMBER
+  Column: QUESTION_ID, Type: NUMBER
+  Column: QUESTION_MULTICHOICE_ID, Type: NUMBER
+  Column: MC_ANSWER_TEXT, Type: VARCHAR2
+  Column: RETURN_VALUE, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: ADD_ANSWER_LIMIT, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    QUESTION_MC_ADD_ID
+  Foreign Keys:
+
+Table: QUESTION_MULTICHOICE
+  Column: QUESTION_MULTICHOICE_ID, Type: NUMBER
+  Column: QUESTION_ID, Type: NUMBER
+  Column: MC_ANSWER_TEXT, Type: VARCHAR2
+  Column: RETURN_VALUE, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    QUESTION_MULTICHOICE_ID
+  Foreign Keys:
+
+Table: RISK
+  Column: RISK_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: RISK_NAME, Type: VARCHAR2
+  Column: RISK_DESCRIPTION, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    RISK_ID
+  Foreign Keys:
+
+Table: RISK_TOPIC_EFFECT_SIGNIFICANCE
+  Column: RISK_ID, Type: NUMBER
+  Column: SUBTOPIC_ID, Type: NUMBER
+  Column: SUBSUBTOPIC_ID, Type: NUMBER
+  Column: IMPACT_ASSESSMENT, Type: NUMBER
+  Column: IMPACT_ASSESSMENT_COMMENT, Type: VARCHAR2
+  Column: EFFECT_SCALE, Type: NUMBER
+  Column: EFFECT_SCALE_COMMENT, Type: VARCHAR2
+  Column: IMPACT_SCOPE, Type: NUMBER
+  Column: IMPACT_SCOPE_COMMENT, Type: VARCHAR2
+  Column: EFFECT_IRREPARABILITY, Type: NUMBER
+  Column: EFFECT_IRREPARABILITY_COMMENT, Type: VARCHAR2
+  Column: EVENT_PROBABILITY, Type: NUMBER
+  Column: EVENT_PROBABILITY_COMMENT, Type: VARCHAR2
+  Column: RISK_STATUS, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: RISK_TOPIC_EFFECT_SIGNIFICANCE_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Primary Keys:
+    RISK_TOPIC_EFFECT_SIGNIFICANCE_ID
+  Foreign Keys:
+
+Table: RISK_TOPIC_FINANCIAL_SIGNIFICANCE
+  Column: RISK_TOPIC_FINANCIAL_SIGNIFICANCE_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: RISK_ID, Type: NUMBER
+  Column: SUBTOPIC_ID, Type: NUMBER
+  Column: SUBSUBTOPIC_ID, Type: NUMBER
+  Column: FINANCIAL_ASSPECT, Type: NUMBER
+  Column: FINANCIAL_ASSPECT_COMMENT, Type: VARCHAR2
+  Column: PROBABILITY_OF_OCCURRENCE, Type: NUMBER
+  Column: CONSEQUENCE_SEVERITY, Type: NUMBER
+  Column: RISK_STATUS, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    RISK_TOPIC_FINANCIAL_SIGNIFICANCE_ID
+  Foreign Keys:
+
+Table: RISK_TOPIC_MATERIALLY
+  Column: RISK_TOPIC_MATERIALLY_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: SUBTOPIC_ID, Type: NUMBER
+  Column: SUBSUBTOPIC_ID, Type: NUMBER
+  Column: MATERIALLY_SIGNIFICANT, Type: NUMBER
+  Column: MATERIALLY_SIGNIFICANT_COMMENT, Type: VARCHAR2
+  Column: EFFECT_SIGNIFICANCE, Type: NUMBER
+  Column: FINANCIAL_SIGNIFICANCE, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    RISK_TOPIC_MATERIALLY_ID
+  Foreign Keys:
+
+Table: STAKEHOLDER
+  Column: STAKEHOLDER_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: STAKEHOLDER_NAME, Type: VARCHAR2
+  Column: TYPE, Type: VARCHAR2
+  Column: STANDARD, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    STAKEHOLDER_ID
+  Foreign Keys:
+
+Table: SUBSUBTOPIC
+  Column: SUBSUBTOPIC_ID, Type: NUMBER
+  Column: SUBSUBTOPIC_NAME, Type: VARCHAR2
+  Column: INSTRUCTIONS, Type: VARCHAR2
+  Column: SUBTOPIC_ID, Type: NUMBER
+  Column: CUSTOM_INDICATOR, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    SUBSUBTOPIC_ID
+  Foreign Keys:
+
+Table: SUBTOPIC
+  Column: SUBTOPIC_ID, Type: NUMBER
+  Column: SUBTOPIC_NAME, Type: VARCHAR2
+  Column: INSTRUCTIONS, Type: VARCHAR2
+  Column: TOPIC_ID, Type: NUMBER
+  Column: CUSTOM_INDICATOR, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    SUBTOPIC_ID
+  Foreign Keys:
+
+Table: TABLE_QUESTIONS
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: MEASURING_GROUP, Type: VARCHAR2
+  Column: MASTER_INDICATOR, Type: VARCHAR2
+  Column: COEFFICIENT, Type: NUMBER
+  Column: CALCULATED_VALUE, Type: NUMBER
+  Column: MEASURING_UNIT_CAL_VAL, Type: VARCHAR2
+  Column: ORDER_BY, Type: NUMBER
+  Column: ESRS_STANDARD, Type: VARCHAR2
+  Column: TABLE_QUESTION_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: YEAR, Type: VARCHAR2
+  Column: ESRS_NUMBER_NA, Type: VARCHAR2
+  Column: ESRS_NUMBER_PER, Type: VARCHAR2
+  Column: ESRS_NAME, Type: VARCHAR2
+  Column: VALUE, Type: NUMBER
+  Column: MEASURING_UNIT, Type: VARCHAR2
+  Column: PERCENTAGE, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    TABLE_QUESTION_ID
+  Foreign Keys:
+
+Table: TABLE_QUESTIONS_MASTER
+  Column: TABLE_QUESTIONS_MASTER_ID, Type: NUMBER
+  Column: TABLE_QUESTIONS_ID_MASTER, Type: NUMBER
+  Column: TABLE_QUESTIONS_ID_DETAIL, Type: NUMBER
+  Column: MASTER_LEVEL, Type: VARCHAR2
+  Column: MEASURING_GROUP, Type: VARCHAR2
+  Column: CLIENT_ID, Type: NUMBER
+  Column: YEAR, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    TABLE_QUESTIONS_MASTER_ID
+  Foreign Keys:
+
+Table: TOPIC
+  Column: TOPIC_ID, Type: NUMBER
+  Column: TOPIC_NAME, Type: VARCHAR2
+  Column: INSTRUCTIONS, Type: VARCHAR2
+  Column: TOPIC_GROUPING_DETAILS_ID, Type: NUMBER
+  Column: ESRS, Type: VARCHAR2
+  Column: ESRS_INFO, Type: VARCHAR2
+  Column: ESRS_STANDARD, Type: VARCHAR2
+  Column: CUSTOM_INDICATOR, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    TOPIC_ID
+  Foreign Keys:
+
+Table: TOPIC_DETAILS
+  Column: TOPIC_DETAILS_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: YEAR, Type: VARCHAR2
+  Column: TOPIC_ID, Type: NUMBER
+  Column: SUBTOPIC_ID, Type: NUMBER
+  Column: SUBSUBTOPIC_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    TOPIC_DETAILS_ID
+  Foreign Keys:
+
+Table: UNIT_OF_MEASUREMENT
+  Column: UNIT_OF_MEASUREMENT_ID, Type: NUMBER
+  Column: QUANTITY_MEASURED, Type: VARCHAR2
+  Column: UNIT, Type: VARCHAR2
+  Column: SYMBOL, Type: VARCHAR2
+  Column: BASE_UNIT_CONVERSION, Type: NUMBER
+  Primary Keys:
+    UNIT_OF_MEASUREMENT_ID
+  Foreign Keys:
+
+Table: USERS
+  Column: USER_ID, Type: NUMBER
+  Column: USERNAME, Type: VARCHAR2
+  Column: PASSWORD, Type: VARCHAR2
+  Column: ROLE_ID, Type: NUMBER
+  Column: FIRST_NAME, Type: VARCHAR2
+  Column: SURNAME, Type: VARCHAR2
+  Column: CLIENT_ID, Type: NUMBER
+  Column: CLIENT_PARTNER_ID, Type: NUMBER
+  Column: STAKEHOLDER_ID, Type: NUMBER
+  Column: ACTIVITY_INDICATOR, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    USER_ID
+  Foreign Keys:
+
+Table: USER_COLLABORATION
+  Column: USER_COLLABORATION_ID, Type: NUMBER
+  Column: CLIENT_ID, Type: NUMBER
+  Column: YEAR, Type: VARCHAR2
+  Column: NAME, Type: VARCHAR2
+  Column: EMAIL, Type: VARCHAR2
+  Column: NOTES, Type: VARCHAR2
+  Column: USERNAME, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: QUESTION_ID, Type: NUMBER
+  Column: NUMBER_OF_DAYS_RESP, Type: NUMBER
+  Primary Keys:
+    USER_COLLABORATION_ID
+  Foreign Keys:
+
+Table: USER_DISCL_REQ
+  Column: USER_ID, Type: NUMBER
+  Column: DISCLOSURE_REQ, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    USER_ID
+    DISCLOSURE_REQ
+  Foreign Keys:
+
+Table: USER_ESRS_STANDARD
+  Column: ESRS_STANDARD, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Column: USER_ID, Type: NUMBER
+  Primary Keys:
+    USER_ID
+    ESRS_STANDARD
+  Foreign Keys:
+
+Table: USER_QUESTION
+  Column: USER_ID, Type: NUMBER
+  Column: QUESTION_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    USER_ID
+    QUESTION_ID
+  Foreign Keys:
+
+Table: USER_ROLE
+  Column: ROLE_ID, Type: NUMBER
+  Column: ROLE_NAME, Type: VARCHAR2
+  Primary Keys:
+    ROLE_ID
+  Foreign Keys:
+
+Table: USER_TOPIC_ESRS_STANDARD
+  Column: USER_ID, Type: NUMBER
+  Column: ESRS_STANDARD, Type: VARCHAR2
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    USER_ID
+    ESRS_STANDARD
+  Foreign Keys:
+
+Table: USER_TOPIC_SUBSUBTOPIC
+  Column: USER_ID, Type: NUMBER
+  Column: SUBSUBTOPIC_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    USER_ID
+    SUBSUBTOPIC_ID
+  Foreign Keys:
+
+Table: USER_TOPIC_SUBTOPIC
+  Column: USER_ID, Type: NUMBER
+  Column: SUBTOPIC_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    USER_ID
+    SUBTOPIC_ID
+  Foreign Keys:
+
+Table: USER_TOPIC_TOPIC
+  Column: USER_ID, Type: NUMBER
+  Column: TOPIC_ID, Type: NUMBER
+  Column: CREATE_USER, Type: NUMBER
+  Column: CREATE_DATE, Type: TIMESTAMP(6)
+  Column: UPDATE_USER, Type: NUMBER
+  Column: UPDATE_DATE, Type: TIMESTAMP(6)
+  Primary Keys:
+    USER_ID
+    TOPIC_ID
+  Foreign Keys:
+

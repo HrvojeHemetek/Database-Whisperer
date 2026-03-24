@@ -1,0 +1,358 @@
+
+
+Table: employees
+  Column: employee_id, Type: integer
+  Column: first_name, Type: character varying
+  Column: last_name, Type: character varying
+  Column: position, Type: character varying
+  Column: hire_date, Type: date
+  Column: salary, Type: numeric
+  Column: status, Type: character varying
+  Primary Keys:
+    employee_id
+  Foreign Keys:
+
+
+
+Table: employeebranch
+  Column: employee_id, Type: integer
+  Column: branch_id, Type: integer
+  Column: date_from, Type: date
+  Column: date_to, Type: date
+  Primary Keys:
+    employee_id
+    date_from
+    date_to
+  Foreign Keys:
+    Column: employee_id, References: employees(employee_id)
+    Column: branch_id, References: branches(branch_id)
+
+
+
+Table: branches
+  Column: branch_id, Type: integer
+  Column: name, Type: character varying
+  Column: location, Type: character varying
+  Primary Keys:
+    branch_id
+  Foreign Keys:
+
+
+
+Table: users
+  Column: user_id, Type: integer
+  Column: first_name, Type: character varying
+  Column: last_name, Type: character varying
+  Column: ssn, Type: character
+  Column: address, Type: character varying
+  Column: phone, Type: character varying
+  Column: email, Type: character varying
+  Column: date_of_birth, Type: date
+  Primary Keys:
+    user_id
+  Foreign Keys:
+
+
+
+Table: accounts
+  Column: account_id, Type: integer
+  Column: user_id, Type: integer
+  Column: account_number, Type: character varying
+  Column: account_type, Type: character varying
+  Column: balance, Type: numeric
+  Column: opening_date, Type: date
+  Column: employee_id, Type: integer
+  Column: status, Type: character varying
+  Primary Keys:
+    account_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+    Column: employee_id, References: employees(employee_id)
+
+
+
+Table: transactions
+  Column: transaction_id, Type: integer
+  Column: account_id, Type: integer
+  Column: amount, Type: numeric
+  Column: transaction_date, Type: date
+  Column: transaction_type, Type: character varying
+  Column: description, Type: character varying
+  Primary Keys:
+    transaction_id
+  Foreign Keys:
+    Column: account_id, References: accounts(account_id)
+
+
+
+Table: loans
+  Column: loan_id, Type: integer
+  Column: user_id, Type: integer
+  Column: loan_amount, Type: numeric
+  Column: interest_rate, Type: numeric
+  Column: repayment_term, Type: integer
+  Column: approval_date, Type: date
+  Column: employee_id, Type: integer
+  Column: status, Type: character varying
+  Primary Keys:
+    loan_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+    Column: employee_id, References: employees(employee_id)
+
+
+
+Table: loanpayments
+  Column: payment_id, Type: integer
+  Column: loan_id, Type: integer
+  Column: amount, Type: numeric
+  Column: due_date, Type: date
+  Column: payment_date, Type: date
+  Column: status, Type: character varying
+  Primary Keys:
+    payment_id
+  Foreign Keys:
+    Column: loan_id, References: loans(loan_id)
+
+
+
+Table: cards
+  Column: card_id, Type: integer
+  Column: user_id, Type: integer
+  Column: card_number, Type: character varying
+  Column: card_type, Type: character varying
+  Column: card_limit, Type: numeric
+  Column: expiration_date, Type: date
+  Column: employee_id, Type: integer
+  Column: status, Type: character varying
+  Primary Keys:
+    card_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+    Column: employee_id, References: employees(employee_id)
+
+
+
+Table: cardtransactions
+  Column: card_transaction_id, Type: integer
+  Column: card_id, Type: integer
+  Column: amount, Type: numeric
+  Column: transaction_date, Type: date
+  Column: description, Type: character varying
+  Primary Keys:
+    card_transaction_id
+  Foreign Keys:
+    Column: card_id, References: cards(card_id)
+
+
+
+Table: investments
+  Column: investment_id, Type: integer
+  Column: user_id, Type: integer
+  Column: investment_type_id, Type: integer
+  Column: amount, Type: numeric
+  Column: investment_date, Type: date
+  Column: maturity_date, Type: date
+  Column: employee_id, Type: integer
+  Column: status, Type: character varying
+  Primary Keys:
+    investment_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+    Column: investment_type_id, References: investmenttypes(investment_type_id)
+    Column: employee_id, References: employees(employee_id)
+
+
+
+Table: investmenttypes
+  Column: investment_type_id, Type: integer
+  Column: name, Type: character varying
+  Primary Keys:
+    investment_type_id
+  Foreign Keys:
+
+
+
+Table: insurance
+  Column: insurance_id, Type: integer
+  Column: user_id, Type: integer
+  Column: insurance_type_id, Type: integer
+  Column: coverage_amount, Type: numeric
+  Column: start_date, Type: date
+  Column: end_date, Type: date
+  Column: employee_id, Type: integer
+  Column: status, Type: character varying
+  Primary Keys:
+    insurance_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+    Column: insurance_type_id, References: insurancetypes(insurance_type_id)
+    Column: employee_id, References: employees(employee_id)
+
+
+
+Table: insurancetypes
+  Column: insurance_type_id, Type: integer
+  Column: name, Type: character varying
+  Primary Keys:
+    insurance_type_id
+  Foreign Keys:
+
+
+
+Table: standingorders
+  Column: order_id, Type: integer
+  Column: account_id, Type: integer
+  Column: amount, Type: numeric
+  Column: start_date, Type: date
+  Column: end_date, Type: date
+  Column: description, Type: character varying
+  Primary Keys:
+    order_id
+  Foreign Keys:
+    Column: account_id, References: accounts(account_id)
+
+
+
+Table: customercomplaints
+  Column: complaint_id, Type: integer
+  Column: user_id, Type: integer
+  Column: date, Type: date
+  Column: description, Type: character varying
+  Column: status, Type: character varying
+  Column: resolution_date, Type: date
+  Primary Keys:
+    complaint_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+
+
+
+Table: transactiontaxes
+  Column: transaction_tax_id, Type: integer
+  Column: transaction_id, Type: integer
+  Column: tax_id, Type: integer
+  Column: amount, Type: numeric
+  Primary Keys:
+    transaction_tax_id
+  Foreign Keys:
+    Column: transaction_id, References: transactions(transaction_id)
+    Column: tax_id, References: taxes(tax_id)
+
+
+
+Table: taxes
+  Column: tax_id, Type: integer
+  Column: name, Type: character varying
+  Column: rate, Type: numeric
+  Primary Keys:
+    tax_id
+  Foreign Keys:
+
+
+
+Table: atms
+  Column: atm_id, Type: integer
+  Column: location, Type: character varying
+  Column: cash_available, Type: numeric
+  Column: status, Type: character varying
+  Primary Keys:
+    atm_id
+  Foreign Keys:
+
+
+
+Table: atmtransactions
+  Column: atm_transaction_id, Type: integer
+  Column: atm_id, Type: integer
+  Column: account_id, Type: integer
+  Column: amount, Type: numeric
+  Column: transaction_date, Type: date
+  Column: description, Type: character varying
+  Primary Keys:
+    atm_transaction_id
+  Foreign Keys:
+    Column: atm_id, References: atms(atm_id)
+    Column: account_id, References: accounts(account_id)
+
+
+
+Table: clientactivities
+  Column: activity_id, Type: integer
+  Column: user_id, Type: integer
+  Column: activity_date, Type: date
+  Column: activity_type, Type: character varying
+  Column: description, Type: character varying
+  Primary Keys:
+    activity_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+
+
+
+Table: customersupport
+  Column: support_id, Type: integer
+  Column: user_id, Type: integer
+  Column: employee_id, Type: integer
+  Column: support_date, Type: date
+  Column: description, Type: character varying
+  Column: status, Type: character varying
+  Column: resolution_date, Type: date
+  Primary Keys:
+    support_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+    Column: employee_id, References: employees(employee_id)
+
+
+
+Table: securitychecks
+  Column: check_id, Type: integer
+  Column: user_id, Type: integer
+  Column: check_date, Type: date
+  Column: result, Type: character varying
+  Primary Keys:
+    check_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+
+
+
+Table: systemaccess
+  Column: access_id, Type: integer
+  Column: employee_id, Type: integer
+  Column: access_date, Type: date
+  Column: description, Type: character varying
+  Primary Keys:
+    access_id
+  Foreign Keys:
+    Column: employee_id, References: employees(employee_id)
+
+
+
+Table: credithistories
+  Column: history_id, Type: integer
+  Column: user_id, Type: integer
+  Column: loan_id, Type: integer
+  Column: date, Type: date
+  Column: status, Type: character varying
+  Column: notes, Type: character varying
+  Primary Keys:
+    history_id
+  Foreign Keys:
+    Column: user_id, References: users(user_id)
+    Column: loan_id, References: loans(loan_id)
+
+
+
+Table: customerrelationships
+  Column: relationship_id, Type: integer
+  Column: user_id_1, Type: integer
+  Column: user_id_2, Type: integer
+  Column: relationship_type, Type: character varying
+  Primary Keys:
+    relationship_id
+  Foreign Keys:
+    Column: user_id_1, References: users(user_id)
+    Column: user_id_2, References: users(user_id)
+
